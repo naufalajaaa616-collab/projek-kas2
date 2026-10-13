@@ -1,0 +1,768 @@
+
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laporan Kas RT 07 RW 03</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #102b50;
+      --blue: #1769e0;
+      --pale: #f3f7fc;
+    }
+
+    body {
+      background: var(--pale);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #172b4d;
+    }
+
+    .sidebar {
+      background: linear-gradient(180deg, #102b50, #0b2342);
+      min-height: 100vh;
+      color: white;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+    .nav-link {
+      color: #dbe7f7;
+      border-radius: .65rem;
+      padding: .75rem 1rem;
+      margin: .18rem 0;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      background: #216de2;
+      color: white;
+    }
+
+    .topbar {
+      background: white;
+      border-bottom: 1px solid #e4ebf4;
+    }
+
+    .welcome {
+      background: linear-gradient(120deg, #0c4db4, #438cf1);
+      color: white;
+      border-radius: 1rem;
+    }
+
+    .stat-card,
+    .panel,
+    .action-card {
+      background: white;
+      border: 1px solid #e4ebf4;
+      border-radius: .9rem;
+      box-shadow: 0 4px 14px #12345a0a;
+    }
+
+    .stat-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .green { background: #12a66a; }
+    .red { background: #ef476f; }
+    .blue { background: #2878e8; }
+    .purple { background: #7156dc; }
+    .orange { background: #f47721; }
+
+    .stat-number {
+      font-size: clamp(1.1rem, 2vw, 1.65rem);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .muted { color: #7183a1; }
+    .section-title { font-weight: 750; }
+
+    .table thead th {
+      background: #f5f8fd;
+      color: #425574;
+      font-size: .85rem;
+      border-bottom: 1px solid #e3eaf4;
+    }
+
+    .badge-income {
+      background: #d8f6e9;
+      color: #087c4d;
+    }
+
+    .badge-expense {
+      background: #ffe0e6;
+      color: #b42345;
+    }
+
+    .btn-primary {
+      background: #1769e0;
+      border-color: #1769e0;
+    }
+
+    .quick-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .form-control,
+    .form-select {
+      border-color: #dce5f1;
+      padding: .65rem .75rem;
+    }
+
+    footer { color: #8292ad; }
+
+    @media (max-width: 767.98px) {
+      .sidebar { min-height: auto; }
+
+      .sidebar .nav {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+
+      .sidebar .nav-link { white-space: nowrap; }
+
+      .welcome { padding: 1.5rem !important; }
+
+      .stat-number { white-space: normal; }
+    }
+
+    @media print {
+      .sidebar,
+      .topbar,
+      .welcome,
+      .actions,
+      .no-print,
+      footer {
+        display: none !important;
+      }
+
+      body { background: white; }
+
+      .panel,
+      .stat-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+
+      .container-fluid { padding: 0 !important; }
+
+      .col-lg-10 { width: 100% !important; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row g-0">
+
+    <!-- SIDEBAR -->
+    <aside class="col-md-3 col-lg-2 sidebar p-3">
+      <div class="d-flex align-items-center gap-2 mb-4 px-2 pt-2">
+        <span style="font-size:2rem">🏘️</span>
+        <div>
+          <div class="brand">Laporan Kas RT 07 RW 03</div>
+          <small class="text-white-50">RT 07 / RW 03</small>
+        </div>
+      </div>
+
+      <nav class="nav flex-column">
+        <a class="nav-link active" href="#beranda">⌂ &nbsp; Beranda</a>
+        <a class="nav-link" href="#transaksi">▣ &nbsp; Transaksi Kas</a>
+        <a class="nav-link" href="#laporan">▤ &nbsp; Laporan</a>
+        <a class="nav-link" href="#panduan">ⓘ &nbsp; Panduan</a>
+        <a class="nav-link" href="#kontak">☎ &nbsp; Kontak RT</a>
+      </nav>
+
+      <div class="small text-white-50 mt-5 px-2">
+        Catat dengan jujur,<br>
+        laporkan dengan transparan.
+      </div>
+    </aside>
+
+    <!-- KONTEN UTAMA -->
+    <main class="col-md-9 col-lg-10">
+
+      <header class="topbar px-4 py-3 d-flex justify-content-between align-items-center">
+        <div class="fw-semibold">Dashboard Keuangan RT</div>
+        <div class="small muted">
+          📅 <span id="tanggalHariIni"></span>
+        </div>
+      </header>
+
+      <div class="p-3 p-lg-4">
+
+        <!-- BERANDA -->
+        <section class="welcome p-4 p-lg-5 mb-4" id="beranda">
+          <div class="row align-items-center g-3">
+            <div class="col-lg-8">
+              <div class="small text-white-50 mb-2">
+                SISTEM ADMINISTRASI WARGA
+              </div>
+
+              <h1 class="h2 fw-bold">
+                Selamat Datang di Laporan Kas RT 07 RW 03
+              </h1>
+
+              <p class="mb-3">
+                Kelola pemasukan, pengeluaran, dan saldo kas RT 07 RW 03
+                secara rapi, mudah, dan transparan.
+              </p>
+
+              <a class="btn btn-light fw-semibold" href="#transaksi">
+                ＋ Catat Transaksi
+              </a>
+            </div>
+
+            <div class="col-lg-4 text-center d-none d-lg-block">
+              <span style="font-size:6rem">💳</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- KONTAK RT -->
+        <section class="panel p-3 p-lg-4 mb-4" id="kontak">
+          <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div>
+              <h2 class="h5 section-title mb-1">
+                Kontak RT 07 RW 03
+              </h2>
+
+              <p class="muted mb-0">
+                Hubungi kontak berikut untuk pertanyaan mengenai kas
+                dan administrasi warga.
+              </p>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <span class="fw-semibold">☎ 0895630348400</span>
+
+              <a
+                class="btn btn-success fw-semibold"
+                href="https://wa.me/62895630348400"
+                target="_blank"
+                rel="noopener noreferrer">
+                Chat WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- RINGKASAN KAS -->
+        <section class="row g-3 mb-4">
+
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card p-3 h-100">
+              <div class="stat-icon green mb-3">↓</div>
+              <div class="muted small">Total Pemasukan</div>
+              <div class="stat-number" id="totalMasuk">Rp 0</div>
+              <small class="muted">Seluruh kas masuk</small>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card p-3 h-100">
+              <div class="stat-icon red mb-3">↑</div>
+              <div class="muted small">Total Pengeluaran</div>
+              <div class="stat-number" id="totalKeluar">Rp 0</div>
+              <small class="muted">Seluruh kas keluar</small>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card p-3 h-100">
+              <div class="stat-icon blue mb-3">Rp</div>
+              <div class="muted small">Saldo Kas</div>
+              <div class="stat-number" id="saldoKas">Rp 0</div>
+              <small class="muted">
+                Pemasukan dikurangi pengeluaran
+              </small>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card p-3 h-100">
+              <div class="stat-icon purple mb-3">▤</div>
+              <div class="muted small">Jumlah Transaksi</div>
+              <div class="stat-number" id="jumlahTransaksi">0</div>
+              <small class="muted">
+                Catatan tersimpan di perangkat ini
+              </small>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- FORM TRANSAKSI DAN LAPORAN -->
+        <section class="row g-3 mb-4" id="transaksi">
+
+          <!-- FORM INPUT -->
+          <div class="col-xl-5">
+            <div class="panel p-3 p-lg-4 h-100">
+
+              <h2 class="h5 section-title mb-1">
+                Tambah Transaksi
+              </h2>
+
+              <p class="muted small mb-4">
+                Isi data pemasukan atau pengeluaran kas RT.
+              </p>
+
+              <form id="formTransaksi">
+
+                <div class="mb-3">
+                  <label class="form-label" for="tanggal">Tanggal</label>
+                  <input
+                    class="form-control"
+                    type="date"
+                    id="tanggal"
+                    required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="jenis">
+                    Jenis transaksi
+                  </label>
+
+                  <select class="form-select" id="jenis" required>
+                    <option value="masuk">Pemasukan</option>
+                    <option value="keluar">Pengeluaran</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="keterangan">
+                    Keterangan
+                  </label>
+
+                  <input
+                    class="form-control"
+                    id="keterangan"
+                    maxlength="120"
+                    placeholder="Contoh: Iuran warga bulan Oktober"
+                    required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="jumlah">
+                    Jumlah (Rp)
+                  </label>
+
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="jumlah"
+                    min="1"
+                    step="1"
+                    placeholder="Contoh: 150000"
+                    required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="catatan">
+                    Catatan (opsional)
+                  </label>
+
+                  <textarea
+                    class="form-control"
+                    id="catatan"
+                    rows="2"
+                    placeholder="Catatan tambahan atau bukti transaksi"></textarea>
+                </div>
+
+                <button class="btn btn-primary w-100" type="submit">
+                  Simpan Transaksi
+                </button>
+
+                <div id="pesanForm" class="mt-3" aria-live="polite"></div>
+
+              </form>
+            </div>
+          </div>
+
+          <!-- TABEL LAPORAN -->
+          <div class="col-xl-7" id="laporan">
+            <div class="panel p-3 p-lg-4 h-100">
+
+              <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+                <div>
+                  <h2 class="h5 section-title mb-1">
+                    Riwayat Transaksi
+                  </h2>
+
+                  <p class="muted small mb-0">
+                    Daftar transaksi kas RT yang tercatat.
+                  </p>
+                </div>
+
+                <button
+                  class="btn btn-outline-primary btn-sm no-print"
+                  onclick="window.print()">
+                  🖨 Cetak Laporan
+                </button>
+              </div>
+
+              <div class="row g-2 mb-3 no-print">
+                <div class="col-sm-6">
+                  <input
+                    class="form-control form-control-sm"
+                    id="cari"
+                    placeholder="Cari keterangan...">
+                </div>
+
+                <div class="col-sm-6">
+                  <select class="form-select form-select-sm" id="filterJenis">
+                    <option value="semua">Semua transaksi</option>
+                    <option value="masuk">Pemasukan saja</option>
+                    <option value="keluar">Pengeluaran saja</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Keterangan</th>
+                      <th>Jenis</th>
+                      <th class="text-end">Jumlah</th>
+                      <th class="no-print">Aksi</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="daftarTransaksi">
+                    <tr>
+                      <td colspan="5" class="text-center muted py-4">
+                        Belum ada transaksi. Silakan tambahkan data.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="small muted">
+                Pastikan bukti pemasukan dan pengeluaran disimpan
+                oleh bendahara RT.
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- MENU CEPAT -->
+        <section class="row g-3 actions">
+
+          <div class="col-md-6 col-xl-4">
+            <div class="action-card p-3 h-100">
+              <div class="quick-icon green mb-3">＋</div>
+              <h3 class="h6 fw-bold">Catat Kas</h3>
+              <p class="small muted">
+                Tambahkan iuran warga, donasi, atau biaya kegiatan.
+              </p>
+              <a href="#transaksi" class="btn btn-success btn-sm">
+                Tambah transaksi
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="action-card p-3 h-100">
+              <div class="quick-icon blue mb-3">▤</div>
+              <h3 class="h6 fw-bold">Cetak Laporan</h3>
+              <p class="small muted">
+                Cetak halaman laporan untuk dokumentasi atau rapat warga.
+              </p>
+              <button
+                class="btn btn-primary btn-sm"
+                onclick="window.print()">
+                Cetak sekarang
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-xl-4" id="panduan">
+            <div class="action-card p-3 h-100">
+              <div class="quick-icon orange mb-3">ⓘ</div>
+              <h3 class="h6 fw-bold">Panduan & Transparansi</h3>
+              <p class="small muted">
+                Catat setiap transaksi dan sampaikan laporan
+                secara berkala kepada warga.
+              </p>
+              <span class="badge text-bg-light">
+                Data contoh tidak disediakan
+              </span>
+            </div>
+          </div>
+
+        </section>
+
+        <footer class="text-center py-4 small">
+          © <span id="tahun"></span>
+          Laporan Kas RT 07 RW 03 · Dikelola untuk transparansi warga.
+        </footer>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+  const STORAGE_KEY = "laporanKasRT_v1";
+  const rupiah = n =>
+    new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }).format(n);
+
+  const el = id => document.getElementById(id);
+  let transaksi = [];
+
+  try {
+    transaksi = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    if (!Array.isArray(transaksi)) transaksi = [];
+  } catch {
+    transaksi = [];
+  }
+
+  const today = new Date();
+
+  const localDate =
+    `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+
+  el("tanggal").value = localDate;
+
+  el("tanggalHariIni").textContent =
+    today.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+
+  el("tahun").textContent = today.getFullYear();
+
+  // MENYIMPAN DATA
+  function simpan() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(transaksi));
+      return true;
+    } catch {
+      tampilPesan(
+        "Penyimpanan browser penuh atau tidak tersedia. Data belum tersimpan.",
+        "danger"
+      );
+      return false;
+    }
+  }
+
+  // MENAMPILKAN PESAN
+  function tampilPesan(pesan, tipe) {
+    el("pesanForm").innerHTML = "";
+
+    const alert = document.createElement("div");
+    alert.className = `alert alert-${tipe} py-2 small`;
+    alert.textContent = pesan;
+
+    el("pesanForm").appendChild(alert);
+  }
+
+  // MENGHITUNG TOTAL KAS
+  function ringkas() {
+    const masuk = transaksi
+      .filter(t => t.jenis === "masuk")
+      .reduce((s, t) => s + t.jumlah, 0);
+
+    const keluar = transaksi
+      .filter(t => t.jenis === "keluar")
+      .reduce((s, t) => s + t.jumlah, 0);
+
+    el("totalMasuk").textContent = rupiah(masuk);
+    el("totalKeluar").textContent = rupiah(keluar);
+    el("saldoKas").textContent = rupiah(masuk - keluar);
+    el("jumlahTransaksi").textContent = transaksi.length;
+  }
+
+  // FORMAT TANGGAL
+  function tanggalIndonesia(tanggal) {
+    const [y, m, d] = tanggal.split("-");
+    return `${d}/${m}/${y}`;
+  }
+
+  // MENAMPILKAN DAFTAR TRANSAKSI
+  function render() {
+    ringkas();
+
+    const cari = el("cari").value.toLowerCase().trim();
+    const filter = el("filterJenis").value;
+
+    const data = [...transaksi]
+      .sort((a, b) => b.tanggal.localeCompare(a.tanggal))
+      .filter(t =>
+        (filter === "semua" || t.jenis === filter) &&
+        (
+          t.keterangan.toLowerCase().includes(cari) ||
+          (t.catatan || "").toLowerCase().includes(cari)
+        )
+      );
+
+    const tbody = el("daftarTransaksi");
+    tbody.replaceChildren();
+
+    if (!data.length) {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+
+      td.colSpan = 5;
+      td.className = "text-center muted py-4";
+      td.textContent = transaksi.length
+        ? "Tidak ada transaksi yang cocok dengan pencarian."
+        : "Belum ada transaksi. Silakan tambahkan data.";
+
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+      return;
+    }
+
+    data.forEach(t => {
+      const tr = document.createElement("tr");
+
+      const values = [
+        tanggalIndonesia(t.tanggal),
+        t.keterangan
+      ];
+
+      values.forEach(v => {
+        const td = document.createElement("td");
+        td.textContent = v;
+        tr.appendChild(td);
+      });
+
+      const typeTd = document.createElement("td");
+      const badge = document.createElement("span");
+
+      badge.className =
+        `badge ${t.jenis === "masuk" ? "badge-income" : "badge-expense"}`;
+
+      badge.textContent =
+        t.jenis === "masuk" ? "Pemasukan" : "Pengeluaran";
+
+      typeTd.appendChild(badge);
+      tr.appendChild(typeTd);
+
+      const amountTd = document.createElement("td");
+      amountTd.className = "text-end text-nowrap fw-semibold";
+
+      amountTd.textContent =
+        (t.jenis === "masuk" ? "+ " : "− ") + rupiah(t.jumlah);
+
+      tr.appendChild(amountTd);
+
+      const actionTd = document.createElement("td");
+      actionTd.className = "no-print";
+
+      const del = document.createElement("button");
+      del.className = "btn btn-outline-danger btn-sm";
+      del.textContent = "Hapus";
+      del.setAttribute(
+        "aria-label",
+        "Hapus transaksi " + t.keterangan
+      );
+
+      del.addEventListener("click", () => {
+        if (confirm("Hapus transaksi ini?")) {
+          transaksi = transaksi.filter(x => x.id !== t.id);
+
+          if (simpan()) render();
+        }
+      });
+
+      actionTd.appendChild(del);
+      tr.appendChild(actionTd);
+
+      if (t.catatan) {
+        tr.title = "Catatan: " + t.catatan;
+      }
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  // MENAMBAHKAN TRANSAKSI
+  el("formTransaksi").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const jumlah = Number(el("jumlah").value);
+    const keterangan = el("keterangan").value.trim();
+
+    if (
+      !keterangan ||
+      !Number.isSafeInteger(jumlah) ||
+      jumlah <= 0
+    ) {
+      tampilPesan(
+        "Isi keterangan dan jumlah rupiah yang valid.",
+        "warning"
+      );
+      return;
+    }
+
+    transaksi.push({
+      id: (
+        crypto.randomUUID
+          ? crypto.randomUUID()
+          : String(Date.now()) + Math.random()
+      ),
+      tanggal: el("tanggal").value,
+      jenis: el("jenis").value,
+      keterangan,
+      jumlah,
+      catatan: el("catatan").value.trim()
+    });
+
+    if (simpan()) {
+      render();
+      e.target.reset();
+      el("tanggal").value = localDate;
+      el("jenis").value = "masuk";
+
+      tampilPesan(
+        "Transaksi berhasil disimpan di browser ini.",
+        "success"
+      );
+    }
+  });
+
+  // PENCARIAN DAN FILTER
+  el("cari").addEventListener("input", render);
+  el("filterJenis").addEventListener("change", render);
+
+  // TAMPILKAN DATA AWAL
+  render();
+</script>
+
+</body>
+</html>
